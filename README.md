@@ -1,9 +1,9 @@
-# api-bikelock
-Entrega da Sprint4 de Java
+# API em Java da Bike Lock
+Entrega da Sprint 4 de Domain Driven Design 
 
 - configurar o plugin do Tomcat no IntelliJ
 
-  <hr>
+<hr>
   <h2>Rota da aplicação</h2>
 - http://contexto:8080/bikelock/(rota desejada)
 
