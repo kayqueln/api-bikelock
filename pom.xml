@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>api-bikelock-sprint4</groupId>
-  <artifactId>ProjetoWebAluno</artifactId>
+  <artifactId>bikelock</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
 
@@ -13,7 +13,7 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.8.1</version>
         <configuration>
-          <release>19</release>
+          <release>17</release>
         </configuration>
       </plugin>
       <plugin>
