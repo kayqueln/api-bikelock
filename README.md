@@ -1,7 +1,7 @@
 # api-bikelock
 Entrega da Sprint4 de Java
 
-- configurar o tomcat
+- configurar o plugin do Tomcat no IntelliJ
 
   <hr>
 
