@@ -6,9 +6,11 @@ public class Cliente {
     private String email;
     private String nome;
     private Long telefone;
-
     private String cpf;
     private String rg;
+    private String senha;
+
+
 
     public String getCpf() {
         return cpf;
@@ -25,8 +27,6 @@ public class Cliente {
     public void setRg(String rg) {
         this.rg = rg;
     }
-
-    private String senha;
 
     public String getSenha() {
         return senha;

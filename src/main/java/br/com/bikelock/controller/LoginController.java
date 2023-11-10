@@ -19,14 +19,11 @@ public class LoginController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response busca(DadosLoginCliente dados){
         try{
-            if(business.logar(dados.getEmail(), dados.getSenha())){
-                return Response.status(Response.Status.OK).build();
-            } else {
-                return Response.status(Response.Status.FORBIDDEN).build();
-            }
+            business.logar(dados);
+            return Response.status(Response.Status.OK).build();
         }catch (Exception e){
-            error.setErro("Usuário não encontrado");
-            return Response.status(Response.Status.BAD_REQUEST).entity(error).build();
+            error.setErro("Usuário ou senha incorreto");
+            return Response.status(Response.Status.FORBIDDEN).entity(error).build();
         }
     }
 

@@ -31,33 +31,6 @@ public class BicicletaRepository {
         return "Bicicleta cadastrada com sucesso.";
     }
 
-    public String atualizar(String numeroDeSerie, Bicicleta bicicleta) throws SQLException {
-        PreparedStatement stmt = minhaConexao.prepareStatement("UPDATE BICICLETA " +
-                "SET DT_COMPRA = ?, VALOR = ?, MARCA = ?, MODELO = ?, EMAIL = ?" +
-                "WHERE NUMERO_SERIE = ?");
-
-        stmt.setDate(1, new Date(bicicleta.getDataCompra().getTime()));
-        stmt.setDouble(2, bicicleta.getValor());
-        stmt.setString(3, bicicleta.getMarca());
-        stmt.setString(4, bicicleta.getModelo());
-        stmt.setString(5, bicicleta.getEmailCliente());
-        stmt.setString(6, numeroDeSerie);
-        stmt.execute();
-        stmt.close();
-
-        return "Bicicleta atualizada com sucesso.";
-    }
-
-    public String deletar(String numeroDeSerie) throws SQLException {
-        PreparedStatement stmt = minhaConexao.prepareStatement("DELETE FROM BICICLETA WHERE NUMERO_SERIE = ?");
-
-        stmt.setString(1, numeroDeSerie);
-        stmt.execute();
-        stmt.close();
-
-        return "Bicicleta deletada com sucesso.";
-    }
-
     public List<Bicicleta> selecionar() throws SQLException {
         List<Bicicleta> listaBicicleta = new ArrayList<Bicicleta>();
         PreparedStatement stmt = minhaConexao.prepareStatement("SELECT * FROM BICICLETA");
@@ -102,5 +75,32 @@ public class BicicletaRepository {
         resultSet.close();
 
         return bicicleta;
+    }
+
+    public String atualizar(String numeroDeSerie, Bicicleta bicicleta) throws SQLException {
+        PreparedStatement stmt = minhaConexao.prepareStatement("UPDATE BICICLETA " +
+                "SET DT_COMPRA = ?, VALOR = ?, MARCA = ?, MODELO = ?, EMAIL = ?" +
+                "WHERE NUMERO_SERIE = ?");
+
+        stmt.setDate(1, new Date(bicicleta.getDataCompra().getTime()));
+        stmt.setDouble(2, bicicleta.getValor());
+        stmt.setString(3, bicicleta.getMarca());
+        stmt.setString(4, bicicleta.getModelo());
+        stmt.setString(5, bicicleta.getEmailCliente());
+        stmt.setString(6, numeroDeSerie);
+        stmt.execute();
+        stmt.close();
+
+        return "Bicicleta atualizada com sucesso.";
+    }
+
+    public String deletar(String numeroDeSerie) throws SQLException {
+        PreparedStatement stmt = minhaConexao.prepareStatement("DELETE FROM BICICLETA WHERE NUMERO_SERIE = ?");
+
+        stmt.setString(1, numeroDeSerie);
+        stmt.execute();
+        stmt.close();
+
+        return "Bicicleta deletada com sucesso.";
     }
 }
