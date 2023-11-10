@@ -44,7 +44,7 @@ public class ClienteController {
             var cliente = business.selecionarPorEmail(email);
             return Response.status(Response.Status.OK).entity(cliente).build();
         }catch (Exception e){
-            error.setErro("E-mail não encontrado");
+            error.setErro("E-mail não foi encontrado");
             return Response.status(Response.Status.BAD_REQUEST).entity(error).build();
         }
     }

@@ -48,8 +48,8 @@ public class BicicletaRepository {
             listaBicicleta.add(bicicleta);
         }
 
-        stmt.close();
         resultSet.close();
+        stmt.close();
 
         return listaBicicleta;
     }

@@ -79,7 +79,7 @@ public class ClienteRepository {
     }
 
     public void atualizar(String email, Cliente cliente) throws SQLException {
-        PreparedStatement stmt = minhaConexao.prepareStatement("UPDATE CLIENTE" +
+        PreparedStatement stmt = minhaConexao.prepareStatement("UPDATE CLIENTE " +
                 "SET EMAIL = ?, NOME = ?, TELEFONE = ?, CPF = ?, RG = ?, SENHA = ?" +
                 "WHERE EMAIL = ?");
 
