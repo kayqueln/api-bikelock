@@ -10,4 +10,9 @@ Entrega da Sprint 4 de Domain Driven Design
 <hr>
 
   <h2>Rotas disponiveis</h2>
-- /bicicleta (GetALL, GetByNumero, Post, Put, Delete)
+- /bicicleta
+- /cliente
+- /endereco
+- /modificacoes
+- /login
+- /
