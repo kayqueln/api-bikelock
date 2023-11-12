@@ -13,9 +13,9 @@ import java.util.ArrayList;
 
 @Path("/cliente")
 public class ClienteController {
+
     private ClienteBusiness business = new ClienteBusiness();
     ErrorResponse error = new ErrorResponse();
-
 
 
     @POST
@@ -44,8 +44,8 @@ public class ClienteController {
             var cliente = business.selecionarPorEmail(email);
             return Response.status(Response.Status.OK).entity(cliente).build();
         }catch (Exception e){
-            error.setErro("E-mail não foi encontrado");
-            return Response.status(Response.Status.BAD_REQUEST).entity(error).build();
+            error.setErro(e.getMessage());
+            return Response.status(Response.Status.NOT_FOUND).entity(error).build();
         }
     }
 

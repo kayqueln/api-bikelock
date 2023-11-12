@@ -2,10 +2,10 @@ package br.com.bikelock.model;
 
 public class Modificacoes {
 
-	private int idModificacao;
+	private Long idModificacao;
 	private String tipoModificacao;
 	private double valorModificacao;
-	private Bicicleta bicicleta;
+	private String numeroDeSerie;
 
 	public Modificacoes() {
 	}
@@ -15,12 +15,12 @@ public class Modificacoes {
 		this.valorModificacao = valorModificacao;
 	}
 
-	public int getIdModificacao() {
-		return idModificacao;
+	public void setIdModificacao(Long idModificacao) {
+		this.idModificacao = idModificacao;
 	}
 
-	public void setIdModificacao(int idModificacao) {
-		this.idModificacao = idModificacao;
+	public Long getIdModificacao() {
+		return idModificacao;
 	}
 
 	public String getTipoModificacao() {
@@ -39,12 +39,12 @@ public class Modificacoes {
 		this.valorModificacao = valorModificacao;
 	}
 
-	public Bicicleta getBicicleta() {
-		return bicicleta;
+	public String getNumeroDeSerie() {
+		return numeroDeSerie;
 	}
 
-	public void setBicicleta(Bicicleta bicicleta) {
-		this.bicicleta = bicicleta;
+	public void setNumeroDeSerie(String numeroDeSerie) {
+		this.numeroDeSerie = numeroDeSerie;
 	}
 
 	@Override

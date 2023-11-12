@@ -22,7 +22,7 @@ public class LoginController {
             business.logar(dados);
             return Response.status(Response.Status.OK).build();
         }catch (Exception e){
-            error.setErro("Usuário ou senha incorreto");
+            error.setErro(e.getMessage());
             return Response.status(Response.Status.FORBIDDEN).entity(error).build();
         }
     }

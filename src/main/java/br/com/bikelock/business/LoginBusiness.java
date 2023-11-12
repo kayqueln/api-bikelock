@@ -16,11 +16,11 @@ public class LoginBusiness {
         Cliente cliente =  repository.selecionarPorEmail(dados.getEmail());
 
         if(cliente.getEmail().isEmpty()){
-            throw new Exception();
+            throw new Exception("Usuário não encontrado");
         }
 
         if(!cliente.getSenha().equals(dados.getSenha())){
-            throw new Exception();
+            throw new Exception("Usuário ou senha incorretos");
         }
 
         return true;

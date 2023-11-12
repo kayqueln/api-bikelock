@@ -2,11 +2,11 @@ package br.com.bikelock.model;
 
 public class Seguro {
 
-	private int idSeguro;
+	private Long idSeguro;
 	private double valor;
 	private String tipoSeguro;
-	private Bicicleta bicicleta;
-	private Cliente cliente;
+	private String numeroDeSerie;
+	private String emailCliente;
 
 	public Seguro() {
 		super();
@@ -18,19 +18,19 @@ public class Seguro {
 		this.tipoSeguro = tipoSeguro;
 	}
 
-	public Cliente getCliente() {
-		return cliente;
+	public String getEmailCliente() {
+		return emailCliente;
 	}
 
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
+	public void setEmailCliente(String emailCliente) {
+		this.emailCliente = emailCliente;
 	}
 
-	public int getIdSeguro() {
+	public Long getIdSeguro() {
 		return idSeguro;
 	}
 
-	public void setIdSeguro(int idSeguro) {
+	public void setIdSeguro(Long idSeguro) {
 		this.idSeguro = idSeguro;
 	}
 
@@ -50,13 +50,6 @@ public class Seguro {
 		this.tipoSeguro = tipoSeguro;
 	}
 
-	public Bicicleta getBicicleta() {
-		return bicicleta;
-	}
-
-	public void setBicicleta(Bicicleta bicicleta) {
-		this.bicicleta = bicicleta;
-	}
 
 	public double valorSeguro(Double valorBicicleta, String tipoSeguro) {
 		double valorSeguro;
@@ -70,6 +63,14 @@ public class Seguro {
 		}
 
 		return valorSeguro;
+	}
+
+	public String getNumeroDeSerie() {
+		return numeroDeSerie;
+	}
+
+	public void setNumeroDeSerie(String numeroDeSerie) {
+		this.numeroDeSerie = numeroDeSerie;
 	}
 
 	@Override

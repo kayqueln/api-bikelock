@@ -17,7 +17,7 @@ public class BicicletaRepository {
         this.minhaConexao = new ConnectionFactory().conexao();
     }
 
-    public String inserir(Bicicleta bicicleta) throws SQLException {
+    public void inserir(Bicicleta bicicleta) throws SQLException {
         PreparedStatement stmt = minhaConexao.prepareStatement("INSERT INTO BICICLETA VALUES(?, ?, ?, ?, ?, ?)");
         stmt.setString(1, bicicleta.getNumeroSerie());
         stmt.setDate(2, new Date(bicicleta.getDataCompra().getTime()));
@@ -28,7 +28,7 @@ public class BicicletaRepository {
         stmt.execute();
         stmt.close();
 
-        return "Bicicleta cadastrada com sucesso.";
+        System.out.println("Bicicleta cadastrada com sucesso.");
     }
 
     public List<Bicicleta> selecionar() throws SQLException {
@@ -77,7 +77,31 @@ public class BicicletaRepository {
         return bicicleta;
     }
 
-    public String atualizar(String numeroDeSerie, Bicicleta bicicleta) throws SQLException {
+    public ArrayList<Bicicleta> selecionarPorEmail(String email) throws SQLException {
+        ArrayList<Bicicleta> listaBicicletas = new ArrayList<>();
+        PreparedStatement stmt = minhaConexao.prepareStatement("SELECT * FROM BICICLETA WHERE EMAIL = ?");
+        stmt.setString(1, email);
+        ResultSet resultSet = stmt.executeQuery();
+
+        while (resultSet.next()){
+            Bicicleta bicicleta = new Bicicleta();
+            bicicleta.setNumeroSerie(resultSet.getString(1));
+            bicicleta.setDataCompra(resultSet.getDate(2));
+            bicicleta.setValor(resultSet.getDouble(3));
+            bicicleta.setMarca(resultSet.getString(4));
+            bicicleta.setModelo(resultSet.getString(5));
+            bicicleta.setEmailCliente(resultSet.getString(6));
+
+            listaBicicletas.add(bicicleta);
+        }
+
+        stmt.close();
+        resultSet.close();
+
+        return listaBicicletas;
+    }
+
+    public void atualizar(String numeroDeSerie, Bicicleta bicicleta) throws SQLException {
         PreparedStatement stmt = minhaConexao.prepareStatement("UPDATE BICICLETA " +
                 "SET DT_COMPRA = ?, VALOR = ?, MARCA = ?, MODELO = ?, EMAIL = ?" +
                 "WHERE NUMERO_SERIE = ?");
@@ -91,16 +115,16 @@ public class BicicletaRepository {
         stmt.execute();
         stmt.close();
 
-        return "Bicicleta atualizada com sucesso.";
+        System.out.println("Bicicleta atualizada com sucesso.");
     }
 
-    public String deletar(String numeroDeSerie) throws SQLException {
+    public void deletar(String numeroDeSerie) throws SQLException {
         PreparedStatement stmt = minhaConexao.prepareStatement("DELETE FROM BICICLETA WHERE NUMERO_SERIE = ?");
 
         stmt.setString(1, numeroDeSerie);
         stmt.execute();
         stmt.close();
 
-        return "Bicicleta deletada com sucesso.";
+        System.out.println("Bicicleta deletada com sucesso.");
     }
 }

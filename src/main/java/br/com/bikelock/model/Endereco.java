@@ -2,13 +2,13 @@ package br.com.bikelock.model;
 
 public class Endereco {
 
-	private int idEndereco;
+	private Long idEndereco;
 	private String cep;
 	private String rua;
 	private String numero;
 	private String estado;
 	private String complemento;
-	private Cliente cliente;
+	private String  emailCliente;
 
 	public Endereco() {
 		super();
@@ -23,11 +23,11 @@ public class Endereco {
 		this.complemento = complemento;
 	}
 
-	public int getIdEndereco() {
+	public Long getIdEndereco() {
 		return idEndereco;
 	}
 
-	public void setIdEndereco(int idEndereco) {
+	public void setIdEndereco(Long idEndereco) {
 		this.idEndereco = idEndereco;
 	}
 
@@ -71,16 +71,24 @@ public class Endereco {
 		this.complemento = complemento;
 	}
 
-	public Cliente getCliente() {
-		return cliente;
+	public String getEmailCliente() {
+		return emailCliente;
 	}
 
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
+	public void setEmailCliente(String emailCliente) {
+		this.emailCliente = emailCliente;
 	}
 
 	@Override
 	public String toString() {
-		return "Endereco [ID do endereço: " + idEndereco + ", Rua: " + rua + ", Número: " + numero + ", CEP: " + cep + ", Estado: " + estado + ", Complemento: " + complemento + "]" + cliente;
+		return "Endereco{" +
+				"idEndereco=" + idEndereco +
+				", cep='" + cep + '\'' +
+				", rua='" + rua + '\'' +
+				", numero='" + numero + '\'' +
+				", estado='" + estado + '\'' +
+				", complemento='" + complemento + '\'' +
+				", emailCliente='" + emailCliente + '\'' +
+				'}';
 	}
 }

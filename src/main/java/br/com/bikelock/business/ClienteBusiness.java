@@ -26,7 +26,7 @@ public class ClienteBusiness {
         Cliente cliente = repository.selecionarPorEmail(email);
 
         if(cliente.getEmail() == null){
-            throw new Exception();
+            throw new Exception("O e-mail não foi encontrado");
         } else {
             return cliente;
         }

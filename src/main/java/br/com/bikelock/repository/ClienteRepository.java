@@ -80,16 +80,15 @@ public class ClienteRepository {
 
     public void atualizar(String email, Cliente cliente) throws SQLException {
         PreparedStatement stmt = minhaConexao.prepareStatement("UPDATE CLIENTE " +
-                "SET EMAIL = ?, NOME = ?, TELEFONE = ?, CPF = ?, RG = ?, SENHA = ?" +
+                "SET NOME = ?, TELEFONE = ?, CPF = ?, RG = ?, SENHA = ?" +
                 "WHERE EMAIL = ?");
 
-        stmt.setString(1, cliente.getEmail());
-        stmt.setString(2, cliente.getNome());
-        stmt.setLong(3, cliente.getTelefone());
-        stmt.setString(4, cliente.getCpf());
-        stmt.setString(5, cliente.getRg());
-        stmt.setString(6, cliente.getSenha());
-        stmt.setString(7, email);
+        stmt.setString(1, cliente.getNome());
+        stmt.setLong(2, cliente.getTelefone());
+        stmt.setString(3, cliente.getCpf());
+        stmt.setString(4, cliente.getRg());
+        stmt.setString(5, cliente.getSenha());
+        stmt.setString(6, email);
         stmt.execute();
         stmt.close();
 
