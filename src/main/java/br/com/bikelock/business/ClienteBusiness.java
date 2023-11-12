@@ -1,20 +1,24 @@
 package br.com.bikelock.business;
 
-import br.com.bikelock.model.Bicicleta;
 import br.com.bikelock.model.Cliente;
-import br.com.bikelock.repository.BicicletaRepository;
 import br.com.bikelock.repository.ClienteRepository;
 
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 
 public class ClienteBusiness {
     private ClienteRepository repository;
 
-    public void inserirCliente(Cliente cliente) throws SQLException, ClassNotFoundException {
-        repository = new ClienteRepository();
-        repository.inserir(cliente);
+    public void inserirCliente(Cliente cliente) throws Exception {
+        try {
+            repository = new ClienteRepository();
+            repository.inserir(cliente);
+        } catch (SQLIntegrityConstraintViolationException s) {
+            throw new Exception("Esse cliente já foi cadastrado na nossa base de dados");
+        }
     }
+
 
     public ArrayList<Cliente> listarClientes() throws SQLException, ClassNotFoundException {
         repository = new ClienteRepository();
