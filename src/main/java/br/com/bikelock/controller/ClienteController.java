@@ -22,11 +22,14 @@ public class ClienteController {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response cadastra(Cliente cliente, @Context UriInfo uriInfo) throws SQLException, ClassNotFoundException {
-        business.inserirCliente(cliente);
-        UriBuilder builder = uriInfo.getAbsolutePathBuilder();
-        builder.path((cliente.getEmail()));
+        try {
+            business.inserirCliente(cliente);
+            return Response.status(Response.Status.CREATED).build();
+        }catch (Exception e){
+            error.setErro(e.getMessage());
+            return Response.status(Response.Status.BAD_REQUEST).entity(error).build();
+        }
 
-        return Response.created(builder.build()).build();
     }
 
     @GET
