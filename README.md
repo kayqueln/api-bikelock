@@ -10,9 +10,9 @@ Entrega da Sprint 4 de Domain Driven Design
 <hr>
 
   <h2>Rotas disponiveis</h2>
-- /bicicleta
-- /cliente
-- /endereco
-- /modificacoes
-- /login
+- /bicicleta</br>
+- /cliente</br>
+- /endereco</br>
+- /modificacoes</br>
+- /login</br>
 - /
