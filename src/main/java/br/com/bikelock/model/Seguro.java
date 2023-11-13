@@ -1,21 +1,21 @@
 package br.com.bikelock.model;
 
+import br.com.bikelock.util.Status;
+import br.com.bikelock.util.TipoSeguro;
+
 public class Seguro {
 
 	private Long idSeguro;
 	private double valor;
-	private String tipoSeguro;
+	private TipoSeguro tipoSeguro;
 	private String numeroDeSerie;
 	private String emailCliente;
+
+	private Status status;
 
 	public Seguro() {
 		super();
 		// TODO Auto-generated constructor stub
-	}
-
-	public Seguro(String tipoSeguro, double valor) {
-		this.valor = valor;
-		this.tipoSeguro = tipoSeguro;
 	}
 
 	public String getEmailCliente() {
@@ -42,27 +42,12 @@ public class Seguro {
 		this.valor = valor;
 	}
 
-	public String getTipoSeguro() {
+	public TipoSeguro getTipoSeguro() {
 		return tipoSeguro;
 	}
 
-	public void setTipoSeguro(String tipoSeguro) {
+	public void setTipoSeguro(TipoSeguro tipoSeguro) {
 		this.tipoSeguro = tipoSeguro;
-	}
-
-
-	public double valorSeguro(Double valorBicicleta, String tipoSeguro) {
-		double valorSeguro;
-
-		if(tipoSeguro.equals("Essencial")){
-			valorSeguro = valorBicicleta * 0.015;
-		} else if (tipoSeguro.equals("Leve")){
-			valorSeguro = valorBicicleta * 0.03;
-		} else {
-			valorSeguro = valorBicicleta * 0.06;
-		}
-
-		return valorSeguro;
 	}
 
 	public String getNumeroDeSerie() {
@@ -71,6 +56,14 @@ public class Seguro {
 
 	public void setNumeroDeSerie(String numeroDeSerie) {
 		this.numeroDeSerie = numeroDeSerie;
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 
 	@Override
