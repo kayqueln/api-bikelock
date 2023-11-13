@@ -3,6 +3,8 @@ package br.com.bikelock.repository;
 
 import br.com.bikelock.config.ConnectionFactory;
 import br.com.bikelock.model.Seguro;
+import br.com.bikelock.util.Status;
+import br.com.bikelock.util.TipoSeguro;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,18 +20,42 @@ public class SeguroRepository {
         this.minhaConexao = new ConnectionFactory().conexao();
     }
 
-    public void inserir(Seguro seguro) throws SQLException {
-        PreparedStatement stmt = minhaConexao.prepareStatement("INSERT INTO SEGURO(VALOR_SEGURO, TIPO_SEGURO, NUMERO_SERIE, EMAIL)" +
-                " VALUES(?, ?, ?, ?)");
+    public void simular(Seguro seguro) throws SQLException {
+        PreparedStatement stmt = minhaConexao.prepareStatement("INSERT INTO SEGURO(VALOR_SEGURO, TIPO_SEGURO, NUMERO_SERIE, EMAIL, STATUS)" +
+                " VALUES(?, ?, ?, ?, ?)");
         stmt.setDouble(1, seguro.getValor());
-        stmt.setString(2, seguro.getTipoSeguro());
+        stmt.setString(2, String.valueOf(seguro.getTipoSeguro()));
         stmt.setString(3, seguro.getNumeroDeSerie());
         stmt.setString(4, seguro.getEmailCliente());
+        stmt.setString(5, String.valueOf(seguro.getStatus()));
         stmt.execute();
         stmt.close();
 
-        System.out.println("Seguro cadastrado com sucesso.");
+        System.out.println("Seguro simulado com sucesso.");
     }
+
+    public void confirmar(Long idSeguro) throws SQLException {
+        PreparedStatement stmt = minhaConexao.prepareStatement("UPDATE SEGURO SET STATUS = ? " +
+                "WHERE ID_SEGURO = ?");
+        stmt.setString(1, String.valueOf(Status.CONFIRMADO));
+        stmt.setLong(2, idSeguro);
+        stmt.execute();
+        stmt.close();
+
+        System.out.println("Seguro confirmado com sucesso.");
+    }
+
+    public void recusar(Long idSeguro) throws SQLException {
+        PreparedStatement stmt = minhaConexao.prepareStatement("UPDATE SEGURO SET STATUS = ? " +
+                "WHERE ID_SEGURO = ?");
+        stmt.setString(1, String.valueOf(Status.RECUSADO));
+        stmt.setLong(2, idSeguro);
+        stmt.execute();
+        stmt.close();
+
+        System.out.println("Seguro confirmado com sucesso.");
+    }
+
 
     public ArrayList<Seguro> selecionarTodos() throws SQLException {
         ArrayList<Seguro> listaSeguros = new ArrayList<>();
@@ -40,9 +66,10 @@ public class SeguroRepository {
             Seguro seguro = new Seguro();
             seguro.setIdSeguro(resultSet.getLong(1));
             seguro.setValor(resultSet.getDouble(2));
-            seguro.setTipoSeguro(resultSet.getString(3));
+            seguro.setTipoSeguro(TipoSeguro.valueOf(resultSet.getString(3)));
             seguro.setNumeroDeSerie(resultSet.getString(4));
             seguro.setEmailCliente(resultSet.getString(5));
+            seguro.setStatus(Status.valueOf(resultSet.getString(6)));
 
             listaSeguros.add(seguro);
         }
@@ -62,9 +89,10 @@ public class SeguroRepository {
         if(resultSet.next()){
             seguro.setIdSeguro(resultSet.getLong(1));
             seguro.setValor(resultSet.getDouble(2));
-            seguro.setTipoSeguro(resultSet.getString(3));
+            seguro.setTipoSeguro(TipoSeguro.valueOf(resultSet.getString(3)));
             seguro.setNumeroDeSerie(resultSet.getString(4));
             seguro.setEmailCliente(resultSet.getString(5));
+            seguro.setStatus(Status.valueOf(resultSet.getString(6)));
         }
 
         resultSet.close();
@@ -82,9 +110,10 @@ public class SeguroRepository {
         if(resultSet.next()){
             seguro.setIdSeguro(resultSet.getLong(1));
             seguro.setValor(resultSet.getDouble(2));
-            seguro.setTipoSeguro(resultSet.getString(3));
+            seguro.setTipoSeguro(TipoSeguro.valueOf(resultSet.getString(3)));
             seguro.setNumeroDeSerie(resultSet.getString(4));
             seguro.setEmailCliente(resultSet.getString(5));
+            seguro.setStatus(Status.valueOf(resultSet.getString(6)));
         }
 
         resultSet.close();
@@ -102,9 +131,10 @@ public class SeguroRepository {
         if(resultSet.next()){
             seguro.setIdSeguro(resultSet.getLong(1));
             seguro.setValor(resultSet.getDouble(2));
-            seguro.setTipoSeguro(resultSet.getString(3));
+            seguro.setTipoSeguro(TipoSeguro.valueOf(resultSet.getString(3)));
             seguro.setNumeroDeSerie(resultSet.getString(4));
             seguro.setEmailCliente(resultSet.getString(5));
+            seguro.setStatus(Status.valueOf(resultSet.getString(6)));
         }
 
         resultSet.close();
@@ -118,7 +148,7 @@ public class SeguroRepository {
                 "SET VALOR_SEGURO = ?, TIPO_SEGURO = ? " +
                 "WHERE ID_SEGURO = ?");
         stmt.setDouble(1, seguro.getValor());
-        stmt.setString(2, seguro.getTipoSeguro());
+        stmt.setString(2, String.valueOf(seguro.getTipoSeguro()));
         stmt.setLong(3, idSeguro);
         stmt.execute();
         stmt.close();

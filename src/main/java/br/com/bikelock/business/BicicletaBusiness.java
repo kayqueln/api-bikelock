@@ -13,6 +13,7 @@ public class BicicletaBusiness {
 
     public void inserirBicicleta(Bicicleta bicicleta) throws Exception {
         repository = new BicicletaRepository();
+
         try {
             repository.inserir(bicicleta);
         }catch (SQLIntegrityConstraintViolationException e){
