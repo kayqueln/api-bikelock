@@ -26,18 +26,20 @@ SeguroBusiness {
 
         Bicicleta bicicleta = bicicletaRepository.selecionarPorNumeroDeSerie(numeroSerie);
         ArrayList<Modificacoes> listaModificacoes = modificacoesRepository.selecionarPorNumeroDeSerie(numeroSerie);
-        Double valorModificacoes = 0.0;
+
+        Double valorTotalModificacoes = 0.0;
 
         for (Modificacoes modificacao : listaModificacoes) {
-            valorModificacoes += modificacao.getValorModificacao();
+            valorTotalModificacoes += modificacao.getValorModificacao();
         }
 
-        double valorSeguro;
+        Double valorTotalBicicleta = bicicleta.getValor() + valorTotalModificacoes;
+        Double valorSeguro;
 
-        if(tipoSeguro == TipoSeguro.ESSENCIAL){
-            valorSeguro = bicicleta.getValor() + valorModificacoes * 0.015;
-        } else if (tipoSeguro == TipoSeguro.LEVE){
-            valorSeguro = bicicleta.getValor() + valorModificacoes * 0.03;
+        if (tipoSeguro == TipoSeguro.ESSENCIAL) {
+            valorSeguro = valorTotalBicicleta * 0.015;
+        } else if (tipoSeguro == TipoSeguro.LEVE) {
+            valorSeguro = valorTotalBicicleta * 0.03;
         } else {
             valorSeguro = bicicleta.getValor() * 0.06;
         }
@@ -57,7 +59,7 @@ SeguroBusiness {
         Seguro seguro = repository.selecionarPorID(idSeguro);
 
         if(seguro.getIdSeguro() == null){
-            throw new Exception("O id seguro não foi encontrado");
+            throw new Exception("O id do seguro não foi encontrado");
         } else {
             repository.confirmar(idSeguro);
         }
@@ -68,7 +70,7 @@ SeguroBusiness {
         Seguro seguro = repository.selecionarPorID(idSeguro);
 
         if(seguro.getIdSeguro() == null){
-            throw new Exception("O id seguro não foi encontrado");
+            throw new Exception("O id do seguro não foi encontrado");
         } else {
             repository.recusar(idSeguro);
         }
