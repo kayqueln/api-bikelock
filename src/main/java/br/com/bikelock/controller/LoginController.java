@@ -2,6 +2,7 @@ package br.com.bikelock.controller;
 
 import br.com.bikelock.business.LoginBusiness;
 import br.com.bikelock.dto.DadosLoginCliente;
+import br.com.bikelock.model.Cliente;
 import br.com.bikelock.util.ErrorResponse;
 
 import javax.ws.rs.*;
@@ -19,8 +20,8 @@ public class LoginController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response busca(DadosLoginCliente dados){
         try{
-            business.logar(dados);
-            return Response.status(Response.Status.OK).build();
+            Cliente logar = business.logar(dados);
+            return Response.status(Response.Status.OK).entity(logar).build();
         }catch (Exception e){
             error.setErro(e.getMessage());
             return Response.status(Response.Status.FORBIDDEN).entity(error).build();

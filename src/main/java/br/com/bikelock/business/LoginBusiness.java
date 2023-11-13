@@ -11,7 +11,7 @@ public class LoginBusiness {
 
     private ClienteRepository repository;
 
-    public boolean logar(DadosLoginCliente dados) throws Exception {
+    public Cliente logar(DadosLoginCliente dados) throws Exception {
         repository = new ClienteRepository();
         Cliente cliente =  repository.selecionarPorEmail(dados.getEmail());
 
@@ -23,6 +23,6 @@ public class LoginBusiness {
             throw new Exception("Usuário ou senha incorretos");
         }
 
-        return true;
+        return cliente;
     }
 }
